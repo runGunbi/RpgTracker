@@ -10,6 +10,7 @@
     "activeTab",
     "storage",
     "tabs",
+    "cookies", // Add the cookies permission
     "https://*.roblox.com/*"
   ],
   "content_scripts": [
