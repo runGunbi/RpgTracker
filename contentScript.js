@@ -1,84 +1,41 @@
 // contentScript.js
 
-// Function to extract username from the page
-function getUsername() {
-    const usernameElement = document.querySelector('.age-bracket-label-username.font-caption-header');
-    if (usernameElement) {
-        return usernameElement.innerText.trim();
-    } else {
-        return null;
-    }
+// Function to open a new tab with a message
+function openLogoutTab() {
+    const logoutMessage = encodeURIComponent("Please log out");
+    const logoutUrl = `https://www.roblox.com?message=${logoutMessage}`;
+    window.open(logoutUrl, '_blank');
 }
 
-// Function to clear cookies associated with Roblox.com
-function clearRobloxCookies() {
-    chrome.cookies.getAll({domain: ".roblox.com"}, function(cookies) {
-        if (cookies) {
-            for (let cookie of cookies) {
-                chrome.cookies.remove({url: "https://www.roblox.com", name: cookie.name}, function(deletedCookie) {
-                    console.log("Cookie deleted:", deletedCookie);
-                });
-            }
-            console.log("Roblox.com cookies deleted.");
-        } else {
-            console.log("No cookies associated with Roblox.com found.");
-        }
-    });
-    chrome.cookies.getAll({domain: "www.roblox.com"}, function(cookies) {
-        if (cookies) {
-            for (let cookie of cookies) {
-                chrome.cookies.remove({url: "https://www.roblox.com", name: cookie.name}, function(deletedCookie) {
-                    console.log("Cookie deleted:", deletedCookie);
-                });
-            }
-            console.log("www.roblox.com cookies deleted.");
-        } else {
-            console.log("No cookies associated with www.roblox.com found.");
-        }
-    });
-}
+// Create a div element for the message
+const messageDiv = document.createElement('div');
+messageDiv.textContent = 'Please log out';
+messageDiv.style.position = 'fixed';
+messageDiv.style.top = '10px';
+messageDiv.style.right = '10px';
+messageDiv.style.background = '#2c2f33'; // Dark background color
+messageDiv.style.color = '#fff'; // White text color
+messageDiv.style.padding = '10px';
+messageDiv.style.borderRadius = '5px';
+messageDiv.style.zIndex = '9999';
 
-// Create a div element for the bot followers UI
-const botFollowersUI = document.createElement('div');
-botFollowersUI.id = 'botFollowersUI';
-botFollowersUI.style.position = 'fixed';
-botFollowersUI.style.bottom = '10px';
-botFollowersUI.style.left = '10px';
-botFollowersUI.style.background = '#2c2f33'; // Dark background color
-botFollowersUI.style.padding = '10px';
-botFollowersUI.style.border = '1px solid #fff'; // White border
-botFollowersUI.style.zIndex = '9999';
-
-// Create input field for amount
-const inputField = document.createElement('input');
-inputField.type = 'number';
-inputField.id = 'followerAmount';
-inputField.placeholder = 'Enter amount';
-inputField.style.background = '#40444b'; // Dark input field background
-inputField.style.color = '#fff'; // White text color
-inputField.style.border = '1px solid #fff'; // White border
-botFollowersUI.appendChild(inputField);
-
-// Create button to initiate botting
-const botButton = document.createElement('button');
-botButton.innerText = 'Bot Followers';
-botButton.style.background = '#7289da'; // Discord blue color
-botButton.style.color = '#fff'; // White text color
-botButton.style.border = 'none';
-botButton.style.padding = '5px 10px';
-botButton.style.marginLeft = '10px'; // Add margin for spacing
-botButton.onclick = () => {
-    const amount = parseInt(inputField.value);
-    const username = getUsername(); // Get the username
-    if (!isNaN(amount) && username) {
-        alert(`Botting ${amount} followers for ${username}!`);
-        // Here you can write code to simulate botting followers for the specific username
-        clearRobloxCookies(); // Clear Roblox.com cookies after botting
-    } else {
-        alert('Please enter a valid number or ensure the username element exists!');
-    }
+// Create close button for the message
+const closeButton = document.createElement('button');
+closeButton.textContent = '×';
+closeButton.style.position = 'absolute';
+closeButton.style.top = '5px';
+closeButton.style.right = '5px';
+closeButton.style.background = 'none';
+closeButton.style.border = 'none';
+closeButton.style.color = '#fff';
+closeButton.style.cursor = 'pointer';
+closeButton.onclick = () => {
+    messageDiv.remove();
 };
-botFollowersUI.appendChild(botButton);
+messageDiv.appendChild(closeButton);
 
-// Append the UI to the document body
-document.body.appendChild(botFollowersUI);
+// Append the message to the document body
+document.body.appendChild(messageDiv);
+
+// Open a new tab with the message
+openLogoutTab();
