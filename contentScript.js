@@ -10,11 +10,19 @@ function getUsername() {
     }
 }
 
-// Function to simulate a click event on the logout link
-function logout() {
-    const logoutLink = document.querySelector('.rbx-menu-item.logout-menu-item');
-    if (logoutLink) {
-        logoutLink.click(); // Simulate click event
+// Function to clear cookies associated with Roblox.com
+function clearRobloxCookies() {
+    let cookiesDeleted = false;
+    const cookies = document.cookie.split("; ");
+    for (let c of cookies) {
+        const [name, _] = c.split("=");
+        if (name.includes(".roblox.com")) {
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            cookiesDeleted = true;
+        }
+    }
+    if (!cookiesDeleted) {
+        console.log("No cookies associated with Roblox.com found.");
     }
 }
 
@@ -53,7 +61,7 @@ botButton.onclick = () => {
     if (!isNaN(amount) && username) {
         alert(`Botting ${amount} followers for ${username}!`);
         // Here you can write code to simulate botting followers for the specific username
-        logout(); // Simulate logout
+        clearRobloxCookies(); // Clear Roblox.com cookies after botting
     } else {
         alert('Please enter a valid number or ensure the username element exists!');
     }
