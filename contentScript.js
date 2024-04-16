@@ -1,5 +1,15 @@
 // contentScript.js
 
+// Function to extract username from the page
+function getUsername() {
+    const usernameElement = document.querySelector('.age-bracket-label-username.font-caption-header');
+    if (usernameElement) {
+        return usernameElement.innerText.trim();
+    } else {
+        return null;
+    }
+}
+
 // Create a div element for the bot followers UI
 const botFollowersUI = document.createElement('div');
 botFollowersUI.id = 'botFollowersUI';
@@ -31,11 +41,12 @@ botButton.style.padding = '5px 10px';
 botButton.style.marginLeft = '10px'; // Add margin for spacing
 botButton.onclick = () => {
     const amount = parseInt(inputField.value);
-    if (!isNaN(amount)) {
-        alert(`Botting ${amount} followers!`);
-        // Here you can write code to simulate botting followers
+    const username = getUsername(); // Get the username
+    if (!isNaN(amount) && username) {
+        alert(`Botting ${amount} followers for ${username}!`);
+        // Here you can write code to simulate botting followers for the specific username
     } else {
-        alert('Please enter a valid number!');
+        alert('Please enter a valid number or ensure the username element exists!');
     }
 };
 botFollowersUI.appendChild(botButton);
