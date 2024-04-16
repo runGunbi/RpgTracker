@@ -6,9 +6,9 @@ botFollowersUI.id = 'botFollowersUI';
 botFollowersUI.style.position = 'fixed';
 botFollowersUI.style.bottom = '10px';
 botFollowersUI.style.left = '10px';
-botFollowersUI.style.background = '#fff';
+botFollowersUI.style.background = '#2c2f33'; // Dark background color
 botFollowersUI.style.padding = '10px';
-botFollowersUI.style.border = '1px solid #000';
+botFollowersUI.style.border = '1px solid #fff'; // White border
 botFollowersUI.style.zIndex = '9999';
 
 // Create input field for amount
@@ -16,11 +16,19 @@ const inputField = document.createElement('input');
 inputField.type = 'number';
 inputField.id = 'followerAmount';
 inputField.placeholder = 'Enter amount';
+inputField.style.background = '#40444b'; // Dark input field background
+inputField.style.color = '#fff'; // White text color
+inputField.style.border = '1px solid #fff'; // White border
 botFollowersUI.appendChild(inputField);
 
 // Create button to initiate botting
 const botButton = document.createElement('button');
 botButton.innerText = 'Bot Followers';
+botButton.style.background = '#7289da'; // Discord blue color
+botButton.style.color = '#fff'; // White text color
+botButton.style.border = 'none';
+botButton.style.padding = '5px 10px';
+botButton.style.marginLeft = '10px'; // Add margin for spacing
 botButton.onclick = () => {
     const amount = parseInt(inputField.value);
     if (!isNaN(amount)) {
