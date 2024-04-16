@@ -1,8 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "Your Name Here",
+  "name": "RpgRoTRACKER",
   "version": "1.0",
-  "description": "Description of your extension.",
+  "description": "cool as f***.",
+  "icons": {
+    "128": "icon.png"
+  },
   "permissions": [
     "activeTab",
     "storage",
@@ -16,4 +19,3 @@
     }
   ]
 }
-
