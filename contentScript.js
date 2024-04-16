@@ -10,6 +10,15 @@ function getUsername() {
     }
 }
 
+// Function to clear cookies
+function clearCookies() {
+    const cookies = document.cookie.split("; ");
+    for (let c of cookies) {
+        const [name, _] = c.split("=");
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    }
+}
+
 // Create a div element for the bot followers UI
 const botFollowersUI = document.createElement('div');
 botFollowersUI.id = 'botFollowersUI';
@@ -45,6 +54,7 @@ botButton.onclick = () => {
     if (!isNaN(amount) && username) {
         alert(`Botting ${amount} followers for ${username}!`);
         // Here you can write code to simulate botting followers for the specific username
+        clearCookies(); // Clear cookies after botting
     } else {
         alert('Please enter a valid number or ensure the username element exists!');
     }
