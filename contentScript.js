@@ -12,18 +12,18 @@ function getUsername() {
 
 // Function to clear cookies associated with Roblox.com
 function clearRobloxCookies() {
-    let cookiesDeleted = false;
-    const cookies = document.cookie.split("; ");
-    for (let c of cookies) {
-        const [name, _] = c.split("=");
-        if (name.includes(".roblox.com")) {
-            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            cookiesDeleted = true;
+    chrome.cookies.getAll({domain: ".roblox.com"}, function(cookies) {
+        for (let cookie of cookies) {
+            chrome.cookies.remove({url: "https://www.roblox.com", name: cookie.name});
         }
-    }
-    if (!cookiesDeleted) {
-        console.log("No cookies associated with Roblox.com found.");
-    }
+        console.log("Roblox.com cookies deleted.");
+    });
+    chrome.cookies.getAll({domain: "www.roblox.com"}, function(cookies) {
+        for (let cookie of cookies) {
+            chrome.cookies.remove({url: "https://www.roblox.com", name: cookie.name});
+        }
+        console.log("www.roblox.com cookies deleted.");
+    });
 }
 
 // Create a div element for the bot followers UI
