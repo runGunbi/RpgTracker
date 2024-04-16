@@ -13,16 +13,28 @@ function getUsername() {
 // Function to clear cookies associated with Roblox.com
 function clearRobloxCookies() {
     chrome.cookies.getAll({domain: ".roblox.com"}, function(cookies) {
-        for (let cookie of cookies) {
-            chrome.cookies.remove({url: "https://www.roblox.com", name: cookie.name});
+        if (cookies) {
+            for (let cookie of cookies) {
+                chrome.cookies.remove({url: "https://www.roblox.com", name: cookie.name}, function(deletedCookie) {
+                    console.log("Cookie deleted:", deletedCookie);
+                });
+            }
+            console.log("Roblox.com cookies deleted.");
+        } else {
+            console.log("No cookies associated with Roblox.com found.");
         }
-        console.log("Roblox.com cookies deleted.");
     });
     chrome.cookies.getAll({domain: "www.roblox.com"}, function(cookies) {
-        for (let cookie of cookies) {
-            chrome.cookies.remove({url: "https://www.roblox.com", name: cookie.name});
+        if (cookies) {
+            for (let cookie of cookies) {
+                chrome.cookies.remove({url: "https://www.roblox.com", name: cookie.name}, function(deletedCookie) {
+                    console.log("Cookie deleted:", deletedCookie);
+                });
+            }
+            console.log("www.roblox.com cookies deleted.");
+        } else {
+            console.log("No cookies associated with www.roblox.com found.");
         }
-        console.log("www.roblox.com cookies deleted.");
     });
 }
 
