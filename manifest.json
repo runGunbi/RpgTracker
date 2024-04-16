@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "RpgEx",
+  "name": "rpgex",
   "version": "1.0",
-  "description": "cool stuff man.",
+  "description": "lol.",
   "icons": {
     "128": "icon.png"
   },
@@ -11,28 +11,11 @@
     "storage",
     "tabs",
     "https://*.roblox.com/*"
-    // Add 
   ],
   "content_scripts": [
     {
       "matches": ["https://www.roblox.com/*"],
       "js": ["contentScript.js"]
     }
-  ],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html",
-    "default_title": "Your Extension Title"
-  },
-  "icons": {
-    "128": "icon.png"
-  },
-  "web_accessible_resources": [
-    "icon.png"
-  ],
-  "options_page": "options.html"
+  ]
 }
