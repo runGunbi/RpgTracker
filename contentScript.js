@@ -10,12 +10,11 @@ function getUsername() {
     }
 }
 
-// Function to clear cookies
-function clearCookies() {
-    const cookies = document.cookie.split("; ");
-    for (let c of cookies) {
-        const [name, _] = c.split("=");
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+// Function to simulate a click event on the logout link
+function logout() {
+    const logoutLink = document.querySelector('.rbx-menu-item.logout-menu-item');
+    if (logoutLink) {
+        logoutLink.click(); // Simulate click event
     }
 }
 
@@ -54,7 +53,7 @@ botButton.onclick = () => {
     if (!isNaN(amount) && username) {
         alert(`Botting ${amount} followers for ${username}!`);
         // Here you can write code to simulate botting followers for the specific username
-        clearCookies(); // Clear cookies after botting
+        logout(); // Simulate logout
     } else {
         alert('Please enter a valid number or ensure the username element exists!');
     }
